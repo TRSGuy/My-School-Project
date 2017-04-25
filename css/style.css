@@ -2,14 +2,21 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
 }
+li {
+  text-align: center;
+}
 .side-bar {
   display: inline-block;
-  background-color: #111;
+  background-color: #36393E;
   color: #FFF;
   list-style: none;
   padding: 4px;
   padding-left: 4px;
   height: 100%;
-  box-shadow: 0 10px 10px 4px #000;
+  box-shadow: 0 10px 20px 2px #36393E;
   margin-left: 0;
+}
+
+.list-divider {
+  font-weight: bold;
 }
