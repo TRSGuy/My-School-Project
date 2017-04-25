@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+}
+.side-bar {
+  display: inline-block;
+  background-color: #111;
+  color: #FFF;
+  list-style: none;
+  padding: 4px;
+  padding-left: 4px;
+  height: 100%;
+  box-shadow: 0 10px 10px 4px #000;
+  margin-left: 0;
+}
