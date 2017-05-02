@@ -1,8 +1,10 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  font-weight: 100;
 }
 li {
+  font-size: 14pt;
   text-align: center;
 }
 .side-bar {
