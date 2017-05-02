@@ -2,19 +2,23 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
+  height: 100%;
 }
 li {
   font-size: 14pt;
   text-align: center;
 }
+.side-bar-container {
+  height: 100%;
+  background-color: #36393E;
+}
 .side-bar {
-  display: inline-block;
+  height: 100%;
   background-color: #36393E;
   color: #FFF;
   list-style: none;
   padding: 4px;
   padding-left: 4px;
-  height: 100%;
   box-shadow: 0 10px 20px 2px #36393E;
   margin-left: 0;
 }
