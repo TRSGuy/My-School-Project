@@ -2,13 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js" charset="utf-8"></script>
     <title>ADHDCenter - Home</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400" rel="stylesheet">
   </head>
-  <body>
-    <div class="side-bar-container">
+  <body onload="main();">
+    <div class="id">
+      <input id="class_id" type="text" onkeydown="if (event.keyCode == 13) initialize()" name="class_id" value="" placeholder="Please enter the four charachter class ID, then hit enter">
+    </div>
+    <div class="grid">
+    <div class="side-bar-container col-2">
       <ul class="side-bar">
         <li class="list-divider">Navigation</li>
         <li class="list-divider"><hr/>--Life at a glance--</li>
@@ -30,11 +35,24 @@
         <li>Swedish</li>
         <!-- TODO: Add more subjects -->
         <li></li>
+        <li class="footer"><hr/>2017 © Kim Karlsson (Vorap)<br>##TheParanoidBox @ irc.freenode.net</li>
       </ul>
     </div>
 
-    <div class="Main-Content">
-      <div class="main-content-header"></div>
-      <div class="main-content-container"></div>
+    <div class="main-content col-8">
+      <div class="main-content-header">Welcome to Nacka Gymnasium</div>
+      <div class="main-content-container">
+        <div class="col-6 upcomming">
+        </div>
+      </div>
+     </div>
+
+     <div class="schedule col-2">
+       <div class="schedule-header">
+         Schedule
+       </div>
+       <img src="" id="schedule" alt="We are having a hard time reaching the schedule servers at the moment, please try again, later">
+     </div>
+    </div>
   </body>
 </html>
