@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hardware-status">
+  <div class="diskUsage">
+    <div class="header">Disk Usage</div>
+    <div class="total">
+      <div class="disk-text">Total: </div>
+      <meter class="disk-meter" value="{{du.total}}" min="0" max="{{du.total}}"></meter>
+      <div class="disk-number">{{du.total}} {{du.unit}}</div><br />
+    </div>
+    <div class="used">
+      <div class="disk-text">Used: </div>
+      <meter class="disk-meter" value="{{du.used}}" min="0" max="{{du.total}}"></meter>
+      <div class="disk-number">{{du.used}} {{du.unit}}</div><br />
+    </div>
+    <div class="free">
+      <div class="disk-text">Free: </div>
+      <meter class="disk-meter" value="{{du.free}}" min="0" max="{{du.total}}"></meter>
+      <div class="disk-number">{{du.free}} {{du.unit}}</div><br />
+    </div>
+    </div>
+    <div id="network-chart">
+      <div class="chart-header">EN2PS0</div>
+      <svg>
+        <polyline id="line" fill="none" stroke="#00F" stroke-width="3" points=""></polyline>
+        <polyline id="upload" width="100%" height="100" fill="none" stroke="#F00" stroke-width="3" points=""></polyline>
+      </svg>
+      <div class="download-text">Download: <span id="network-speed-text"></span></div>
+      <div class="upload-text">Upload: <span id="network-up-text"></span></div>
+    </div>
+  </div>
+<div class="table">
+{% for torrent in t %}
+<div class="row">
+  <div class="id cell">ID: {{torrent.id}}</div>
+  <div class="queue cell">Queue Position: {{torrent.queuePosition}}</div>
+  <div class="name cell">Filename: {{torrent.name}}</div>
+  <div class="added-date cell">Date Added: {{torrent.addedDate}}</div>
+  <div class="eta cell">ETA: {{torrent.eta}}</div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

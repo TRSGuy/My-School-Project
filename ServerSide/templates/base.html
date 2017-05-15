@@ -1,0 +1,185 @@
+<html>
+  <head>
+    <title>VoraBoard</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <script type="text/javascript">
+    function main() {
+
+    }
+    var x = [];
+    var y = [];
+    var y_up = [];
+    var count = 32;
+    var step = 20;
+
+    function getSpeed(handleData) {
+      $.ajax({url: "http://localhost:5000/speeds", success: function(result) {
+        handleData(result);
+      }});
+    }
+
+    function initializeGraph() {
+      string = '';
+      upload_string = '';
+      for(i = 0; i < count; i++) {
+        tmp = i * step;
+        x.push(tmp);
+        getSpeed(
+          function(output) {
+            y.push(output['down']);
+            y_up.push(output['up']);
+            upload_string += x[i] + ' ' + y_up[i] + ', ';
+            string += x[i] + ' ' + y[i] + ', ';
+          }
+        );
+      }
+      $('#upload').attr('points', upload_string);
+      $('#line').attr('points', string);
+    }
+    function do_calc(b) {
+      return 100 - (b / 1024 / 1024) * 6
+    }
+    function updateGraph() {
+      string = '';
+      upload_string = '';
+      y.shift();
+      y_up.shift();
+      getSpeed(
+        function(output) {
+          y.push(output['down']);
+          y_up.push(output['up']);
+        }
+      );
+      for (var i = 0; i + 1 < count; i++) {
+        string += x[i] + ' ' + do_calc(y[i]) + ', ';
+        upload_string += x[i] + ' ' + do_calc(y_up[i]) + ', ';
+      }
+      $('#line').attr('points', string);
+      $('#upload').attr('points', upload_string);
+      if(((y_up[count - 2]) / 1024 / 1024).toFixed(3) < 1.024) {
+        $('#network-up-text').text(((y_up[count - 2]) / 1024).toFixed(2) + ' KiB/s');
+      }
+      else {
+        $('#network-up-text').text(((y_up[count - 2]) / 1024 / 1024).toFixed(2) + ' MiB/s');
+      }
+      if(((y[count - 2]) / 1024 / 1024).toFixed(3) < 1.024) {
+        $('#network-speed-text').text(((y[count - 2]) / 1024).toFixed(2) + ' KiB/s');
+      }
+      else {
+        $('#network-speed-text').text(((y[count - 2]) / 1024 / 1024).toFixed(2) + ' MiB/s');
+      }
+    }
+    initializeGraph();
+    setInterval(function(){updateGraph();}, 500);
+    </script>
+    <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #36393E;
+      color: #FFF;
+      padding: 0;
+      margin: 0;
+      font-weight: 300;
+      width: 100%;
+
+    }
+    .header {
+      text-align: center;
+      padding-bottom: 4px;
+      font-size: 22pt;
+      font-weight: 100;
+    }
+    .table {
+      border-radius: 20px;
+      border: none;
+      background-color: #202225;
+      box-shadow: 0 0 8px 2px #222;
+      max-width: 640px;
+      max-height: 40vh;
+      float: left;
+      padding: 10px;
+      margin-right: 10px;
+      padding-bottom: 0px;
+      overflow-y: scroll;
+      float: right;
+    }
+    svg {
+      width: 100%;
+    }
+    .row {
+      font-size: 11pt;
+      overflow-x: hidden;
+      width: 600px;
+      max-height: 40vh;
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      border-bottom: 1px #FFF solid;
+    }
+    .hardware-status {
+      border-radius: 20px;
+      border: none;
+      margin: 10px;
+      margin-top: 10px;
+      height: 100vh;
+      width: 600px;
+      background-color: #202225;
+      box-shadow: 0 0 8px 2px #222;
+      float: left;
+      display: block;
+      z-index: 0;
+    }
+    .disk-meter {
+      float: left;
+      width: 60%;
+      -moz-appearance: none;
+      -webkit-appearence: none;
+    }
+    .disk-meter::-moz-meter-bar {
+      background: none;
+      background-color: #008cff;
+    }
+    .disk-number {
+      float: left;
+      padding-left: 4px;
+    }
+    .disk-text {
+      float: left;
+      width: 70px;
+      vertical-align: center;
+    }
+    .disk-usage {
+      width: 100%;
+      height: 100vh;
+    }
+    #guage {
+      width: 100%;
+      height: 100%;
+    }
+    .chart-header {
+      font-size: 18pt;
+      width: 100%;
+      text-align: center;
+    }
+    .download-text {
+      color: #00F;
+    }
+    .upload-text {
+      color: #F00;
+    }
+    #network-up-text {
+      color: #FFF;
+    }
+    #network-speed-text {
+      color: #FFF;
+    }
+    #line, #upload {
+      width: 100%;
+    }
+    </style>
+  </head>
+  <body onload="main()">
+      {% block content %}{% endblock %}
+  </body>
+</html>

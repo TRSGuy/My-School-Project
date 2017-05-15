@@ -10,31 +10,11 @@
   </head>
   <body onload="main();">
     <div class="id">
-      <input id="class_id" type="text" onkeydown="if (event.keyCode == 13) initialize()" name="class_id" value="" placeholder="Please enter the four charachter class ID, then hit enter">
+      <input id="class-id" type="text" onkeydown="if (event.keyCode == 13) initialize()" name="class_id" value="" placeholder="Please enter the four charachter class ID, then hit enter">
     </div>
     <div class="grid">
     <div class="side-bar-container col-2">
-      <ul class="side-bar">
-        <li class="list-divider">Navigation</li>
-        <li class="list-divider"><hr/>--Life at a glance--</li>
-        <li>Upcomming</li>
-        <li>Schedule</li>
-        <li class="list-divider"><hr/>--Information--</li>
-        <li>School information</li>
-        <li>Upcomming events</li>
-        <li class="list-divider"><hr/>--People--</li>
-        <li>Classmates</li>
-        <li>Teachers</li>
-        <li class="list-divider"><hr/>--Subjects--</li>
-        <li>Web development</li>
-        <li>Computer Science</li>
-        <li>Mechatronics</li>
-        <li>Electromechanics</li>
-        <li>Math</li>
-        <li>English</li>
-        <li>Swedish</li>
-        <!-- TODO: Add more subjects -->
-        <li></li>
+      <ul class="side-bar" id="sidebar">
         <li class="footer"><hr/>2017 © Kim Karlsson (Vorap)<br>##TheParanoidBox @ irc.freenode.net</li>
       </ul>
     </div>
@@ -51,7 +31,7 @@
        <div class="schedule-header">
          Schedule
        </div>
-       <img src="" id="schedule" alt="We are having a hard time reaching the schedule servers at the moment, please try again, later">
+       <img src="" id="schedule-image" alt="We are having a hard time reaching the schedule servers at the moment, please try again, later">
      </div>
     </div>
   </body>
