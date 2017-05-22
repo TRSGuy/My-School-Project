@@ -14,7 +14,6 @@ li {
   text-align: center;
   font-weight: 300;
   font-size: 22pt;
-
 }
 .side-bar-container {
   height: 100vh;
@@ -36,39 +35,20 @@ li {
   height: 100vh;
 }
 #schedule {
-  height: calc(100vh - 22pt);
+  height: calc(100vh - 24px);
   width: 100%;
 }
-[class*='col-'] {
-  float: left;
-}
-.lefty {
-  float: left;
-}
-.col-1 {
-  width: 8.33%;
-}
-.col-2 {
-  width: 16.66%;
-}
-.col-8 {
-  width: 66.66%;
-}
-.col-9 {
-  width: 75%;
-}
-.col-10 {
-  width: 83.33%;
-}
-.col-11 {
-  width: 90.66%
-}
 .footer {
-  font-size: 9pt;
+  font-size: 10pt;
   color: #CCC;
 }
 
-.list-divider {
+.list-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.list-header {
   font-weight: bold;
 }
 
@@ -95,4 +75,66 @@ li {
   margin: auto;
   position: relative;
   top: 46%;
+}
+
+#main-content {
+  width: 100%;
+}
+#main-content div {
+  width: 100%;
+  text-align: center;
+  font-size: 14pt;
+}
+
+.name-list {
+  list-style: none;
+}
+
+.name .first  {
+  font-weight: bold;
+}
+
+
+@keyframes pulse {
+  0% {color: #FFF;}
+  50% {color: rgba(255, 255, 255, 0.4);}
+  100% {color: #FFF;}
+}
+
+[class*='col-'] {
+  float: left;
+}
+.lefty {
+  float: left;
+}
+.col-1 {
+  width: 8.33%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-6 {width: 50%;}
+.col-8 {
+  width: 66.66%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-11 {
+  width: 90.66%
+}
+.separator {
+  border-bottom: 1px solid #FFF;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.navigation-item:hover {
+  animation-duration: 1s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  cursor: pointer;
 }
