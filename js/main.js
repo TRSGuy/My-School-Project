@@ -16,17 +16,17 @@ content = {
       {
         'subject': 'Computer Science',
         'teacher-name': ['Vahap', 'Bilgec'],
-        'picture-url': 'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=2037'
+        'picture-url': 'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=2037&1495482396870'
       },
       {
         'subject': 'Web Development',
         'teacher-name': ['Garabed', 'Hakopian'],
-        'picture-url': 'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=2047'
+        'picture-url': 'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=2047&1495482396870'
       },
       {
         'subject': 'Mechatronics',
         'teacher-name': ['Shirin', 'Nasirpour'],
-        'picture-url':'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=4343'
+        'picture-url':'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=4343&1495482396870'
       },
       {
         'subject': 'Electromechanics',
@@ -36,7 +36,7 @@ content = {
       {
         'subject': 'English',
         'teacher-name': ['Catharina', 'Winbäck'],
-        'picture-url': 'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=2081'
+        'picture-url': 'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=2081&1495482396870'
       },
       {
         'subject': 'Math',
@@ -98,16 +98,31 @@ function change_content(obj) {
   }
 
   else if (content[name]['content-type'] == 'contact-list') {
-    list_root = $('<ul>', {class: 'contact-list'});
+    list_root = $('<ul>', {class: 'contact-list' });
     for (var i = 0; i < content[name]['content'].length; i++) {
-      list_root = $('<ul>', {class: 'contact-entry'});
-      name = $('<li>', {class: 'name'});
-      first = $('<span>', {class: 'first', 'text': content[name]['content'][i]['teacher-name'][0] + ' '});
-      last = $('<span>', {class: 'last', 'text': content[name]['content'][i]['teacher-name'][1]});
-      name.append(first);
-      name.append(last);
+      entry_root = $('<ul>', {class: 'contact-entry' });
+      name_entry = $('<li>', {class: 'name' });
+      first = $('<span>', {class: 'first', 'text': content[name]['content'][i]['teacher-name'][0] + ' ' });
+      last = $('<span>', {class: 'last', 'text': content[name]['content'][i]['teacher-name'][1] });
+      name_entry.append(first);
+      name_entry.append(last);
+      entry_root.append(name_entry);
+      subject = $('<li>', {class: 'subject', text: content[name]['content'][i]['subject'] });
+      entry_root.append(subject);
+      image_root = $('<li>', {class: 'teacher-image' });
+      if(content[name]['content'][i]['picture-url']) {
+        image_element = $('<img>', {src:content[name]['content'][i]['picture-url']})
+      }
+      else {
+        image_element = $('<img>', { src:'http://www.shawnee.edu/_resources/images/profile-placeholder.png' });
+      }
+      image_root.append(image_element);
+      entry_root.append(image_root);
+      list_root.append(entry_root);
     }
+    $('#main-content').append(list_root);
   }
+}
 
 function main() {
   $('.navigation-item').each(
@@ -145,5 +160,5 @@ function initialize(cookie_exists) {
     document.cookie = 'classid=' + id;
     get_schedule();
   }
-  // TODO: ADD AN ELSE TO PROMPT THE USER ABOUT THE ID BEING INVALID
+  // TODO: ADD AN ELSE STATEMENT TO PROMPT THE USER ABOUT THE ID BEING INVALID
 }
