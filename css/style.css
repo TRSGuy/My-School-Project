@@ -17,6 +17,7 @@ li {
 }
 .side-bar-container {
   height: 100vh;
+  overflow: hidden;
   padding: 0;
   margin: 0;
   background-color: #36393E;
@@ -34,8 +35,8 @@ li {
 .schedule {
   height: 100vh;
 }
-#schedule {
-  height: calc(100vh - 24px);
+#schedule-image {
+  height: 95vh;
   width: 100%;
 }
 .footer {
@@ -113,7 +114,9 @@ li {
 .col-2 {
   width: 16.66%;
 }
-.col-6 {width: 50%;}
+.col-6 {
+  width: 50%;
+}
 .col-8 {
   width: 66.66%;
 }
@@ -137,4 +140,25 @@ li {
   animation-name: pulse;
   animation-iteration-count: infinite;
   cursor: pointer;
+}
+
+.teacher-image {
+  width: 70px;
+  margin: auto;
+}
+
+.contact-list {
+  list-style: none;
+}
+ .contact-entry {
+   width: 45%;
+   height: 200px;
+   list-style: none;
+   float: left;
+ }
+.contact-entry li {
+  float: left;
+  display: block;
+  padding-right: 10px;
+  vertical-align: middle;
 }

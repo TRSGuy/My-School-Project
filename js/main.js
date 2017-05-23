@@ -16,17 +16,17 @@ content = {
       {
         'subject': 'Computer Science',
         'teacher-name': ['Vahap', 'Bilgec'],
-        'picture-url': 'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=2037&1495482396870'
+        'picture-url': false
       },
       {
         'subject': 'Web Development',
         'teacher-name': ['Garabed', 'Hakopian'],
-        'picture-url': 'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=2047&1495482396870'
+        'picture-url': false
       },
       {
         'subject': 'Mechatronics',
         'teacher-name': ['Shirin', 'Nasirpour'],
-        'picture-url':'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=4343&1495482396870'
+        'picture-url': false
       },
       {
         'subject': 'Electromechanics',
@@ -36,7 +36,7 @@ content = {
       {
         'subject': 'English',
         'teacher-name': ['Catharina', 'Winbäck'],
-        'picture-url': 'https://schoolsoftelev.nacka.se/nacka/jsp/student/pictureFile.jsp?teacherId=2081&1495482396870'
+        'picture-url': false
       },
       {
         'subject': 'Math',
@@ -106,18 +106,21 @@ function change_content(obj) {
       last = $('<span>', {class: 'last', 'text': content[name]['content'][i]['teacher-name'][1] });
       name_entry.append(first);
       name_entry.append(last);
-      entry_root.append(name_entry);
-      subject = $('<li>', {class: 'subject', text: content[name]['content'][i]['subject'] });
-      entry_root.append(subject);
-      image_root = $('<li>', {class: 'teacher-image' });
+
+      subject = $('<li>', {class: 'subject', text: content[name]['content'][i]['subject']});
+
+      image_root = $('<li>', {class: 'teacher-image'});
       if(content[name]['content'][i]['picture-url']) {
-        image_element = $('<img>', {src:content[name]['content'][i]['picture-url']})
+        image_element = $('<img>', {src:content[name]['content'][i]['picture-url'], class: 'teacher-image'})
       }
       else {
-        image_element = $('<img>', { src:'http://www.shawnee.edu/_resources/images/profile-placeholder.png' });
+        image_element = $('<img>', { src:'http://www.shawnee.edu/_resources/images/profile-placeholder.png', class: 'teacher-image'});
       }
       image_root.append(image_element);
       entry_root.append(image_root);
+      entry_root.append(name_entry);
+      entry_root.append(subject);
+      entry_root.append($('<br/>'));
       list_root.append(entry_root);
     }
     $('#main-content').append(list_root);
