@@ -49,6 +49,41 @@ content = {
         'picture-url': false
       }
     ]
+  },
+  'Computer Science': {
+    'content-type': 'subject',
+    'upcomming': 'There is nothing upcomming in this subject',
+    'teacher': 0
+  },
+  'Web Development': {
+    'content-type': 'subject',
+    'upcomming': 'Presentation about our school website (Monday/Tuseday)',
+    'teacher': 1
+  },
+  'Mechatronics': {
+    'content-type': 'subject',
+    'upcomming': 'Final Exam (Friday)',
+    'teacher': 2
+  },
+  'Electromechanics': {
+    'content-type': 'subject',
+    'upcomming': 'There is nothing upcomming in this subject',
+    'teacher': 3
+  },
+  'English': {
+    'content-type': 'subject',
+    'upcomming': 'Presentation about a topic of our choice (Wednesday/Friday)',
+    'teacher': 4
+  },
+  'Math': {
+    'content-type': 'subject',
+    'upcomming': 'There is nothing upcomming in this subject',
+    'teacher': 5
+  },
+  'Swedish': {
+    'content-type': 'subject',
+    'upcomming': 'There is nothing upcomming in this subject',
+    'teacher': 6
   }
 }
 
@@ -111,7 +146,7 @@ function change_content(obj) {
 
       image_root = $('<li>', {class: 'teacher-image'});
       if(content[name]['content'][i]['picture-url']) {
-        image_element = $('<img>', {src:content[name]['content'][i]['picture-url'], class: 'teacher-image'})
+        image_element = $('<img>', {src:content[name]['content'][i]['picture-url'], class: 'teacher-image'});
       }
       else {
         image_element = $('<img>', { src:'http://www.shawnee.edu/_resources/images/profile-placeholder.png', class: 'teacher-image'});
@@ -125,12 +160,25 @@ function change_content(obj) {
     }
     $('#main-content').append(list_root);
   }
+  else if (content[name]['content-type'] == 'subject') {
+    entry = content[name];
+    teacher = content['Teachers']['content'][entry['teacher']];
+    teacher_name = teacher['teacher-name'];
+    first = $('<span>', {class: 'first', 'text': teacher_name[0] + ' ' });
+    last = $('<span>', {class: 'last', 'text': teacher_name[1]});
+    upcomming = entry['upcomming'];
+    image = teacher['picture-url']
+    console.log('Upcomming: ' + upcomming);
+    console.log('Teacher Name: ' + teacher_name[0]);
+    console.log('Image: ' + image);
+
+  }
 }
 
 function main() {
   $('.navigation-item').each(
     function() {
-      $(this).attr('onclick', 'change_content(this);')
+      $(this).attr('onclick', 'change_content(this);');
     }
   )
   if (document.cookie !== "") {

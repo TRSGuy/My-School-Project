@@ -17,14 +17,15 @@ li {
 }
 .side-bar-container {
   height: 100vh;
-  overflow: hidden;
   padding: 0;
   margin: 0;
   background-color: #36393E;
+  display: block;
 }
 .side-bar {
-  margin: 0;
   height: 100vh;
+  margin: 0;
+  display: block;
   background-color: #36393E;
   color: #FFF;
   list-style: none;
@@ -80,6 +81,8 @@ li {
 
 #main-content {
   width: 100%;
+  height: 96vh;
+  overflow-y: scroll;
 }
 #main-content div {
   width: 100%;
