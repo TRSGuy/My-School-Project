@@ -87,7 +87,6 @@ content = {
   }
 }
 
-console.log(content);
 function time() {
     var now = new Date();
     Date.prototype.getWeek = function() {
@@ -109,22 +108,21 @@ window.onresize = function(event) {
 };
 
 function change_content(obj) {
-  var name = obj.innerHTML;
-  console.log(content)
+  var name = $(obj).text();
   $('#main-content').empty();
   $('.main-content-header').text(name);
 
   if(content[name]['content-type'] == 'text') {
-    page_content = $('<div>', {text: content[name]['content']})
+    var page_content = $('<div>', {text: content[name]['content'], class: 'text'});
     $('#main-content').append(page_content);
   }
 
   else if(content[name]['content-type'] == 'name-list') {
-    page_content = $('<ul>', {class: 'name-list'});
+    var page_content = $('<ul>', {class: 'name-list'});
     for (var i = 0; i < content[name]['content'].length; i++) {
-      first = $('<span>', {class: 'first', 'text': content[name]['content'][i][0] + ' '});
-      last = $('<span>', {class: 'last', 'text': content[name]['content'][i][1]});
-      list_element = $('<li>', {class: 'name'});
+      var first = $('<span>', {class: 'first', 'text': content[name]['content'][i][0] + ' '});
+      var last = $('<span>', {class: 'last', 'text': content[name]['content'][i][1]});
+      var list_element = $('<li>', {class: 'name'});
       list_element.append(first);
       list_element.append(last);
       page_content.append(list_element);
@@ -133,27 +131,29 @@ function change_content(obj) {
   }
 
   else if (content[name]['content-type'] == 'contact-list') {
-    list_root = $('<ul>', {class: 'contact-list' });
+    var list_root = $('<ul>', {class: 'contact-list' });
     for (var i = 0; i < content[name]['content'].length; i++) {
-      entry_root = $('<ul>', {class: 'contact-entry' });
-      name_entry = $('<li>', {class: 'name' });
-      first = $('<span>', {class: 'first', 'text': content[name]['content'][i]['teacher-name'][0] + ' ' });
-      last = $('<span>', {class: 'last', 'text': content[name]['content'][i]['teacher-name'][1] });
+      var entry_root = $('<ul>', {class: 'contact-entry' });
+      var name_entry = $('<li>', {class: 'name' });
+      var first = $('<span>', {class: 'first', 'text': content[name]['content'][i]['teacher-name'][0] + ' ' });
+      var last = $('<span>', {class: 'last', 'text': content[name]['content'][i]['teacher-name'][1] });
       name_entry.append(first);
       name_entry.append(last);
 
-      subject = $('<li>', {class: 'subject', text: content[name]['content'][i]['subject']});
+      var subject = $('<li>', {class: 'subject', text: content[name]['content'][i]['subject']});
 
       image_root = $('<li>', {class: 'teacher-image'});
       if(content[name]['content'][i]['picture-url']) {
-        image_element = $('<img>', {src:content[name]['content'][i]['picture-url'], class: 'teacher-image'});
+        var image_element = $('<img>', {src:content[name]['content'][i]['picture-url'], class: 'teacher-image'});
       }
       else {
-        image_element = $('<img>', { src:'http://www.shawnee.edu/_resources/images/profile-placeholder.png', class: 'teacher-image'});
+        var image_element = $('<img>', { src:'http://www.shawnee.edu/_resources/images/profile-placeholder.png', class: 'teacher-image'});
       }
       image_root.append(image_element);
       entry_root.append(image_root);
       entry_root.append(name_entry);
+      entry_root.append($('<br/>'));
+      entry_root.append($('<br/>'));
       entry_root.append(subject);
       entry_root.append($('<br/>'));
       list_root.append(entry_root);
@@ -161,21 +161,37 @@ function change_content(obj) {
     $('#main-content').append(list_root);
   }
   else if (content[name]['content-type'] == 'subject') {
-    entry = content[name];
-    teacher = content['Teachers']['content'][entry['teacher']];
-    teacher_name = teacher['teacher-name'];
-    first = $('<span>', {class: 'first', 'text': teacher_name[0] + ' ' });
-    last = $('<span>', {class: 'last', 'text': teacher_name[1]});
-    upcomming = entry['upcomming'];
-    image = teacher['picture-url']
-    console.log('Upcomming: ' + upcomming);
-    console.log('Teacher Name: ' + teacher_name[0]);
-    console.log('Image: ' + image);
-
+    var entry = content[name];
+    var teacher = content['Teachers']['content'][entry['teacher']];
+    var teacher_name = teacher['teacher-name'];
+    var first = $('<span>', {class: 'first', text: teacher_name[0] + ' ' });
+    var last = $('<span>', {class: 'last', text: teacher_name[1]});
+    var upcomming = entry['upcomming'];
+    var image = teacher['picture-url'];
+    if(!image) {
+      var image_url = 'http://www.shawnee.edu/_resources/images/profile-placeholder.png';
+    }
+    else {
+      var image_url = image;
+    }
+    var teacher_root = $('<div>', {class: 'righty'});
+    var upcomming_root = $('<div>', {class: 'text', text: upcomming});
+    var teacher_image = $('<img>', {src: image_url, class: 'teacher-image'});
+    var teacher_name_root = $('<div>');
+    var first = $('<span>', {class: 'first', text: teacher_name[0] + ' ' });
+    var last = $('<span>', {class: 'last', text: teacher_name[1]});
+    teacher_name_root.append(first);
+    teacher_name_root.append(last);
+    teacher_root.append(teacher_name_root);
+    teacher_root.append(teacher_image);
+    var root = $('#main-content');
+    root.append(teacher_root);
+    root.append(upcomming_root);
   }
 }
 
 function main() {
+  $('.grid').hide();
   $('.navigation-item').each(
     function() {
       $(this).attr('onclick', 'change_content(this);');
@@ -193,7 +209,6 @@ function get_schedule() {
   var id = $('#class-id').val();
   var url = 'http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=58700/sv-se&type=-1&id=' + id + '&period=&week=' + time_array[0] + '&mode=0&printer=0&colors=32&head=1&clock=1&foot=1&day=' + time_array[1] + '&width=' + w + '&height=' + h + '&maxwidth=' + w + '&maxheight=' + h + '';
   $('#schedule-image').attr('src', url);
-  console.log(url)
 }
 
 function initialize(cookie_exists) {
@@ -211,5 +226,20 @@ function initialize(cookie_exists) {
     document.cookie = 'classid=' + id;
     get_schedule();
   }
-  // TODO: ADD AN ELSE STATEMENT TO PROMPT THE USER ABOUT THE ID BEING INVALID
+  else {
+    alert('The ID You entered is not in our database, please select another ID');
+  }
+}
+
+function hide_navigation() {
+  if($('#sidebar').is(":visible")) {
+    $('#sidebar').slideUp('900');
+    $('#hide-nav').addClass('hide');
+    $('#hide-nav').removeClass('show');;
+  }
+  else {
+    $('#sidebar').slideDown('900');
+    $('#hide-nav').removeClass('hide');
+    $('#hide-nav').addClass('show');
+  }
 }
