@@ -104,6 +104,9 @@ window.onload = main();
 window.onresize = function(event) {
   if (document.cookie !== "") {
     get_schedule(true);
+    if (!window.matchMedia('(max-width: 950px)').matches && !$('#sidebar').is(":visible")) {
+      $('#sidebar').show();
+    }
   }
 };
 

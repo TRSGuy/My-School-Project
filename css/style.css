@@ -5,8 +5,10 @@
     [class*="col-"] {
         width: 100% !important;
     }
+
     .schedule-header, .main-content-header {
       border-top: 1px solid #000;
+      margin-top: 5px !important;
     }
     #hide-nav {
       display: inline-block !important;
@@ -27,7 +29,6 @@ li {
   font-size: 14pt;
   text-align: center;
 }
-
 .schedule-header {
   width: 100%;
   text-align: center;
@@ -200,18 +201,18 @@ li {
 }
 
 .show {
-  transition: 1s ease-in-out;
-  -moz-transition: 1s ease-in-out;
-  -webkit-transistion: 1s ease-in-out;
+  transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -webkit-transistion: 0.5s ease-in-out;
   -moz-transform: rotate(0deg);
   -webkit-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
 .hide {
-  transition: 1s ease-in-out;
-  -moz-transition: 1s ease-in-out;
-  -webkit-transistion: 1s ease-in-out;
+  transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -webkit-transistion: 0.5s ease-in-out;
   -moz-transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
